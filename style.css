@@ -1,0 +1,205 @@
+:root {
+    --primary-pink: #ff85a1;
+    --secondary-pink: #ffb3c1;
+    --accent-purple: #9d81e1;
+    --text-dark: #4a4a4a;
+    --bg-gradient: linear-gradient(135deg, #fff5f7 0%, #f0efff 100%);
+    --glass: rgba(255, 255, 255, 0.7);
+    --shadow: 0 10px 30px rgba(255, 133, 161, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Gowun Dodum', sans-serif;
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: var(--text-dark);
+}
+
+/* Dynamic background blobs */
+.bg-blobs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.4;
+    animation: move 20s infinite alternate;
+}
+
+.blob-1 {
+    width: 300px;
+    height: 300px;
+    background: var(--primary-pink);
+    top: -100px;
+    left: -100px;
+}
+
+.blob-2 {
+    width: 400px;
+    height: 400px;
+    background: var(--accent-purple);
+    bottom: -150px;
+    right: -150px;
+    animation-delay: -5s;
+}
+
+@keyframes move {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(100px, 100px) scale(1.2); }
+}
+
+.container {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 30px;
+    padding: 40px 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    z-index: 1;
+}
+
+.image-wrapper {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 30px;
+    border-radius: 25px;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    transform: rotate(-3deg);
+    transition: transform 0.3s ease;
+}
+
+.image-wrapper:hover {
+    transform: rotate(0deg) scale(1.05);
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 15px;
+}
+
+.question {
+    font-size: 1.6rem;
+    line-height: 1.4;
+    margin-bottom: 40px;
+    font-weight: bold;
+    color: #ff4d6d;
+}
+
+#user-name {
+    display: block;
+    font-size: 1.2rem;
+    color: var(--accent-purple);
+    margin-bottom: 8px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    height: 60px;
+    align-items: center;
+}
+
+.btn {
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.btn.yes {
+    background: linear-gradient(135deg, #ff85a1 0%, #ff4d6d 100%);
+    color: white;
+    flex: 1;
+}
+
+.btn.yes:active {
+    transform: scale(0.95);
+}
+
+.btn.no {
+    background-color: #f0f0f0;
+    color: #999;
+    padding: 12px 25px;
+}
+
+.hidden {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.success-screen {
+    animation: slideUp 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.success-msg {
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 3rem;
+    color: #ff4d6d;
+    margin-top: 20px;
+}
+
+.heart {
+    position: fixed;
+    pointer-events: none;
+    z-index: 100;
+    animation: floatUp var(--duration) linear forwards;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; transform: translateY(90vh) scale(1) rotate(10deg); }
+    90% { opacity: 1; }
+    100% { transform: translateY(-20vh) scale(1.5) rotate(360deg); opacity: 0; }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 85%;
+        padding: 30px 15px;
+    }
+    .question {
+        font-size: 1.4rem;
+    }
+}
+
